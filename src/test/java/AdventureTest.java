@@ -21,7 +21,7 @@ public class AdventureTest {
     }
 
     @Test
-    public void searchingFilteredTour(){
+    public void searchingAdventure(){
         List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             HomePage homePage = new HomePage(webDriver);
@@ -31,10 +31,10 @@ public class AdventureTest {
             adventurePage.searchTour(CITY_WHERE);
 
             WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(30));
-            List<WebElement> tickets = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[@id=\"__ssr__verify-layout\"]/div[2]/div[5]/div/div[1]/div[2]")));
+            List<WebElement> tickets = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//a[@data-ti-regular-type='scheduled']/../..")));
 
             adventurePage.doFilter(COST);
-            List<WebElement> ticketsAfterFilter = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[@id=\"__ssr__verify-layout\"]/div[2]/div[5]/div/div[1]/div[2]")));
+            List<WebElement> ticketsAfterFilter = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//a[@data-ti-regular-type='scheduled']/../..")));
 
             assert tickets.size() >= ticketsAfterFilter.size() : "что-то не так";
         });

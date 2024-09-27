@@ -30,7 +30,7 @@ public class SignUpTest {
             homePage.signUp(CORRECT_MAIL);
 
             WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-            WebElement sendCodeForRegisterMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//strong[@class='zs2K2sscD_kMthNV']/..")));
+            WebElement sendCodeForRegisterMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@data-ti-screen='registration-email-code-code']")));
             Assertions.assertNotNull(sendCodeForRegisterMessage.getText());
         });
         drivers.forEach(WebDriver::quit);

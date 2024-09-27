@@ -13,6 +13,7 @@ import java.util.List;
 public class SearchTrainTicketTest {
     public static final String CITY_FROM = "Санкт-Петербург";
     private static final String CITY_WHERE = "Москва";
+    public static final String DATE = "Mon Sep 30 2024";
 
     @BeforeAll
     public static void initDrivers() {
@@ -25,7 +26,7 @@ public class SearchTrainTicketTest {
         drivers.parallelStream().forEach(webDriver -> {
             HomePage homePage = new HomePage(webDriver);
             webDriver.get(Utils.PAGE);
-            homePage.searchTrainTickets(CITY_FROM,CITY_WHERE);
+            homePage.searchTrainTickets(CITY_FROM,CITY_WHERE, DATE);
 
             WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
 

@@ -20,26 +20,30 @@ public class TourPage extends Page{
         super(driver);
     }
 
-    public void searchTour(){
+    public void searchTour(String cityFrom, String cityWhere, String date){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         WebElement tourFromCityInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INPUT_FROM_FIELD)));
         tourFromCityInput.click();
-        WebElement cityChoose = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='Санкт-Петербург']/..")));
+
+        String cityFromXpath = String.format("//span[text()='%s']/..", cityFrom);
+        WebElement cityChoose = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(cityFromXpath)));
         cityChoose.click();
 
         WebElement aviaWhereCityInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INPUT_WHERE_FIELD)));
         aviaWhereCityInput.click();
-        WebElement cityChooseTo = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[text()='Турция']")));
+
+        String cityWhereXpath = String.format("//div[text()='%s']", cityWhere);
+        WebElement cityChooseTo = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(cityWhereXpath)));
         cityChooseTo.click();
 
         WebElement dateInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INPUT_DATA_FIELD)));
         dateInput.click();
-        WebElement dateElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@aria-label='Sat Sep 28 2024']")));
+
+        String dateXpath = String.format("//div[@aria-label='%s']", date);
+        WebElement dateElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(dateXpath)));
         dateElement.click();
         dateInput.click();
-//        WebElement submitDate = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@data-ti='close']")));
-//        submitDate.click();
 
         WebElement searchButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(SEARCH_SCHEDULE_BUTTON)));
         searchButton.click();

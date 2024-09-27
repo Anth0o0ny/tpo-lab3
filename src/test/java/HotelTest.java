@@ -14,22 +14,24 @@ import java.util.List;
 
 public class HotelTest {
     public static final String CITY_FROM = "Москва";
+    public static final String DATE_FROM = "Fri Sep 27 2024";
+    public static final String DATE_TO = "Mon Sep 30 2024";
     @BeforeAll
     public static void initDrivers() {
         Utils.prepareDrivers();
     }
 
     @Test
-    public void searchingElectricSchedule(){
+    public void searchingHotel(){
         List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
             HomePage homePage = new HomePage(webDriver);
             webDriver.get(Utils.PAGE);
             homePage.goToHotelPage();
             HotelPage hotelPage = new HotelPage(webDriver);
-            hotelPage.searchHotel(CITY_FROM);
+            hotelPage.searchHotel(CITY_FROM, DATE_FROM, DATE_TO);
 
-            WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10000));
+            WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(1000));
             List<WebElement> tickets = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@data-ti='hotel-offer-list']")));
             assert tickets.size() > 0 : "Укажите корректные данные";
         });

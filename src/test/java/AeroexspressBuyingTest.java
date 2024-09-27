@@ -12,6 +12,7 @@ import java.time.Duration;
 import java.util.List;
 
 public class AeroexspressBuyingTest {
+    public static final String DATE = "Sat Sep 28 2024";
     public static final String MAIL = "testName@mail.ru";
     public static final String PHONE = "9999999999";
     @BeforeAll
@@ -27,7 +28,7 @@ public class AeroexspressBuyingTest {
             webDriver.get(Utils.PAGE);
             homePage.goToAeroexpressPage();
             AeroexpressPage aeroexpressPage = new AeroexpressPage(webDriver);
-            aeroexpressPage.fastAeroSearch(MAIL, PHONE);
+            aeroexpressPage.fastAeroSearch(DATE, MAIL, PHONE);
 
             WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(30));
             List<WebElement> tickets = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[@id=\"payment_form\"]")));

@@ -12,6 +12,7 @@ import java.time.Duration;
 import java.util.List;
 
 public class ElectricTrainTest {
+    public static final String DATE_DAY = "21";
     public static final String CITY_FROM = "Санкт-Петербург (все вокзалы)";
     private static final String CITY_WHERE = "Колпино (Московское напр.)";
     @BeforeAll
@@ -27,10 +28,10 @@ public class ElectricTrainTest {
             webDriver.get(Utils.PAGE);
             homePage.goToElectricTicketsPage();
             ElectricTrainPage electricTrainPage = new ElectricTrainPage(webDriver);
-            electricTrainPage.searchElectricSchedule(CITY_FROM, CITY_WHERE);
+            electricTrainPage.searchElectricSchedule(CITY_FROM, CITY_WHERE,DATE_DAY);
 
             WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-            List<WebElement> tickets = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@class='desktop__timetable__3wEtY']")));
+            List<WebElement> tickets = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//th[text()='Режим движения']/ancestor::table/tbody")));
             assert tickets.size() > 0 : "Укажите корректные данные";
         });
         drivers.forEach(WebDriver::quit);

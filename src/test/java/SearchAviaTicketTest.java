@@ -12,6 +12,7 @@ public class SearchAviaTicketTest {
 
     public static final String CITY_FROM = "Санкт-Петербург";
     private static final String CITY_WHERE = "Москва";
+    public static final String DATE = "Mon Sep 30 2024";
 
     @BeforeAll
     public static void initDrivers() {
@@ -24,7 +25,7 @@ public class SearchAviaTicketTest {
         drivers.parallelStream().forEach(webDriver -> {
             HomePage homePage = new HomePage(webDriver);
             webDriver.get(Utils.PAGE);
-            homePage.searchAviaTickets(CITY_FROM,CITY_WHERE);
+            homePage.searchAviaTickets(CITY_FROM,CITY_WHERE, DATE);
 
             WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
             List<WebElement> tickets = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@data-ti='offersList']")));

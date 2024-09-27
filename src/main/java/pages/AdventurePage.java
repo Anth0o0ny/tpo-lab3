@@ -28,13 +28,8 @@ public class AdventurePage extends Page{
 
     public void doFilter(String priceTo){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//
-//        WebElement direction = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"__ssr__verify-layout\"]/div[2]/div[4]/div/div/div/div[1]/div/div/div[2]/div/button")));
-//        direction.click();
-//        WebElement chooseDirection = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='Тбилиси, Грузия']/ancestor::div[contains(@class, 'o331109')]")));
-//        chooseDirection.click();
 
-        WebElement cost = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"__ssr__verify-layout\"]/div[2]/div[4]/div/div/div/div/div/div/div[4]/div/button")));
+        WebElement cost = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@data-ti='price_filter']/*/button")));
         cost.click();
         WebElement priceToField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@data-ti='price_to_input']")));
         priceToField.click();

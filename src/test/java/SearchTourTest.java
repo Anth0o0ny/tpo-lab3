@@ -13,6 +13,10 @@ import java.time.Duration;
 import java.util.List;
 
 public class SearchTourTest {
+    public static final String DATE = "Mon Sep 30 2024";
+    public static final String CITY_FROM = "Санкт-Петербург";
+    private static final String CITY_WHERE = "Турция";
+
     @BeforeAll
     public static void initDrivers() {
         Utils.prepareDrivers();
@@ -26,7 +30,7 @@ public class SearchTourTest {
             webDriver.get(Utils.PAGE);
             homePage.goToTourPage();
             TourPage tourPage = new TourPage(webDriver);
-            tourPage.searchTour();
+            tourPage.searchTour(CITY_FROM, CITY_WHERE, DATE);
 
             WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10000));
             List<WebElement> tickets = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@class='hotelsContainer']")));

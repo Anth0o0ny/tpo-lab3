@@ -11,7 +11,7 @@ import java.time.Duration;
 public class AeroexpressPage extends Page{
 
 
-    public static final String INPUT_DATA_FIELD = "//*[@id=\"root\"]/div/div[2]/div[3]/div[2]/div/div[1]/div/div/div/input";
+    public static final String INPUT_DATA_FIELD = "//input[@placeholder='Выберите дату']";
     public static final String FIRST_STAGE_CONTINUE_BUTTON = "//button[@data-ti='navigate-to-passenger-page']";
     public static final String INPUT_MAIL_FIELD = "//input[@data-ti='email-input']";
     public static final String INPUT_PHONE_FIELD = "//input[@data-ti='phone-input']";
@@ -22,16 +22,18 @@ public class AeroexpressPage extends Page{
         super(driver);
     }
 
-    public void fastAeroSearch(String mail, String number) {
+    public void fastAeroSearch(String date, String mail, String number) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        firstStage(wait);
+        firstStage(wait, date);
         secondStage(wait, mail, number);
     }
 
-    void firstStage(WebDriverWait wait) {
+    void firstStage(WebDriverWait wait, String date) {
         WebElement dateInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INPUT_DATA_FIELD)));
         dateInput.click();
-        WebElement dateElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@aria-label='Sat Sep 28 2024']")));
+
+        String dateXpath = String.format("//div[@aria-label='%s']", date);
+        WebElement dateElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(dateXpath)));
         dateElement.click();
 
         WebElement continueButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(FIRST_STAGE_CONTINUE_BUTTON)));
