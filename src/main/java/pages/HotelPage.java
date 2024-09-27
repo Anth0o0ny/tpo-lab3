@@ -12,6 +12,8 @@ public class HotelPage extends Page{
 
     public static final String INPUT_FROM_FIELD = "//span[text()='Куда хотите поехать?']/../input";
     public static final String DATE_FIELD = "//span[text()='Когда']/../input";
+    public static final String TICKETS_RESULT_LIST_XPATH = "//div[@data-ti='hotel-offer-list']";
+    public static final String ERROR_MESSAGE = "Укажите корректные данные";
 
     public HotelPage(WebDriver driver) {
         super(driver);

@@ -31,12 +31,12 @@ public class AdventureTest {
             adventurePage.searchTour(CITY_WHERE);
 
             WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(30));
-            List<WebElement> tickets = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//a[@data-ti-regular-type='scheduled']/../..")));
+            List<WebElement> tickets = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(AdventurePage.TICKETS_RESULT_LIST_XPATH)));
 
             adventurePage.doFilter(COST);
-            List<WebElement> ticketsAfterFilter = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//a[@data-ti-regular-type='scheduled']/../..")));
+            List<WebElement> ticketsAfterFilter = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(AdventurePage.TICKETS_RESULT_LIST_XPATH)));
 
-            assert tickets.size() >= ticketsAfterFilter.size() : "что-то не так";
+            assert tickets.size() >= ticketsAfterFilter.size() : AdventurePage.ERROR_MESSAGE;
         });
         drivers.forEach(WebDriver::quit);
     }

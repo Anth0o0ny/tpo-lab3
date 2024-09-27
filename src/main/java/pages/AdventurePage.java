@@ -7,10 +7,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class AdventurePage extends Page{
 
+    public static final String TICKETS_RESULT_LIST_XPATH = "//a[@data-ti-regular-type='scheduled']/../..";
     public static final String INPUT_WHERE_FIELD = "//input[@data-ti='input']";
+    public static final String ERROR_MESSAGE = "что-то не так";
 
     public AdventurePage(WebDriver driver) {
         super(driver);

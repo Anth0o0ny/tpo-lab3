@@ -14,6 +14,8 @@ public class ElectricTrainPage extends Page{
     public static final String INPUT_WHERE_FIELD = "//input[@placeholder='Куда']";
     public static final String INPUT_DATA_FIELD = "//input[@placeholder='Дата']";
     public static final String SEARCH_SCHEDULE_BUTTON = "//span[@class='inner_wrapper']/span[3]";
+    public static final String TICKETS_RESULT_LIST_XPATH = "//th[text()='Режим движения']/ancestor::table/tbody";
+    public static final String ERROR_MESSAGE = "Укажите корректные данные";
 
 
     public ElectricTrainPage(WebDriver driver) {

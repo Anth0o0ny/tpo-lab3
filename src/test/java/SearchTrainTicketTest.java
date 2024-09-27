@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.HomePage;
+import pages.TrainTicketSearchPage;
 
 import java.time.Duration;
 import java.util.List;
@@ -24,9 +25,9 @@ public class SearchTrainTicketTest {
     public void searchingTrainTickets(){
         List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
-            HomePage homePage = new HomePage(webDriver);
+            TrainTicketSearchPage trainTicketSearchPage = new TrainTicketSearchPage(webDriver);
             webDriver.get(Utils.PAGE);
-            homePage.searchTrainTickets(CITY_FROM,CITY_WHERE, DATE);
+            trainTicketSearchPage.searchTrainTickets(CITY_FROM,CITY_WHERE, DATE);
 
             WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
 

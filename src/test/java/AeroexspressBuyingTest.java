@@ -31,8 +31,8 @@ public class AeroexspressBuyingTest {
             aeroexpressPage.fastAeroSearch(DATE, MAIL, PHONE);
 
             WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(30));
-            List<WebElement> tickets = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[@id=\"payment_form\"]")));
-            assert tickets.size() > 0 : "Ошибка страницы оплаты";
+            List<WebElement> tickets = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(AeroexpressPage.TICKETS_RESULT_LIST_XPATH)));
+            assert tickets.size() > 0 : AeroexpressPage.ERROR_MESSAGE;
         });
         drivers.forEach(WebDriver::quit);
     }

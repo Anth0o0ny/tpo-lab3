@@ -32,8 +32,8 @@ public class HotelTest {
             hotelPage.searchHotel(CITY_FROM, DATE_FROM, DATE_TO);
 
             WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(1000));
-            List<WebElement> tickets = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@data-ti='hotel-offer-list']")));
-            assert tickets.size() > 0 : "Укажите корректные данные";
+            List<WebElement> tickets = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(HotelPage.TICKETS_RESULT_LIST_XPATH)));
+            assert tickets.size() > 0 : HotelPage.ERROR_MESSAGE;
         });
         drivers.forEach(WebDriver::quit);
     }

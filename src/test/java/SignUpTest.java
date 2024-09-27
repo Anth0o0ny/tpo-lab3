@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.HomePage;
 import pages.HotelPage;
+import pages.SignUpPage;
 
 import java.time.Duration;
 import java.util.List;
@@ -25,12 +26,15 @@ public class SignUpTest {
     public void signUpWithCorrectData(){
         List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
+            WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
             HomePage homePage = new HomePage(webDriver);
             webDriver.get(Utils.PAGE);
-            homePage.signUp(CORRECT_MAIL);
+            homePage.openLoginWindow(wait);
 
-            WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-            WebElement sendCodeForRegisterMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@data-ti-screen='registration-email-code-code']")));
+            SignUpPage signUpPage = new SignUpPage(webDriver);
+            signUpPage.signUp(CORRECT_MAIL);
+
+            WebElement sendCodeForRegisterMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(SignUpPage.SEND_CODE_REGISTRATION_WINDOW_XPATH)));
             Assertions.assertNotNull(sendCodeForRegisterMessage.getText());
         });
         drivers.forEach(WebDriver::quit);
@@ -40,12 +44,16 @@ public class SignUpTest {
     public void signUpWithIncorrectData(){
         List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
+            WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
             HomePage homePage = new HomePage(webDriver);
             webDriver.get(Utils.PAGE);
-            homePage.signUp(INCORRECT_MAIL);
+            homePage.openLoginWindow(wait);
 
-            WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-            WebElement errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[@data-ti-error='email']")));
+            SignUpPage signUpPage = new SignUpPage(webDriver);
+            signUpPage.signUp(INCORRECT_MAIL);
+
+
+            WebElement errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(SignUpPage.ERROR_MESSAGE_XPATH)));
             Assertions.assertNotNull(errorMessage.getText());
         });
         drivers.forEach(WebDriver::quit);

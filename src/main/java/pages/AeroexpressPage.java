@@ -17,6 +17,9 @@ public class AeroexpressPage extends Page{
     public static final String INPUT_PHONE_FIELD = "//input[@data-ti='phone-input']";
     public static final String INPUT_CHECKBOX_FIELD = "//input[@data-ti='agreement-input']";
     public static final String SECOND_STAGE_CONTINUE_BUTTON = "//button[@data-ti='navigate-to-payment']";
+    public static final String TICKETS_RESULT_LIST_XPATH = "//*[@id=\"payment_form\"]";
+    public static final String ERROR_MESSAGE = "Ошибка страницы оплаты";
+
 
     public AeroexpressPage(WebDriver driver) {
         super(driver);
@@ -24,11 +27,11 @@ public class AeroexpressPage extends Page{
 
     public void fastAeroSearch(String date, String mail, String number) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        firstStage(wait, date);
-        secondStage(wait, mail, number);
+        enteringTripData(wait, date);
+        enteringUserCred(wait, mail, number);
     }
 
-    void firstStage(WebDriverWait wait, String date) {
+    void enteringTripData (WebDriverWait wait, String date) {
         WebElement dateInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INPUT_DATA_FIELD)));
         dateInput.click();
 
@@ -40,7 +43,7 @@ public class AeroexpressPage extends Page{
         continueButton.click();
     }
 
-    void secondStage(WebDriverWait wait, String mail, String number) {
+    void enteringUserCred(WebDriverWait wait, String mail, String number) {
         WebElement mailInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(INPUT_MAIL_FIELD)));
         mailInput.click();
         mailInput.sendKeys(mail);

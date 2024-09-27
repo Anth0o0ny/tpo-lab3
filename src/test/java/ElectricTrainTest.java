@@ -31,8 +31,8 @@ public class ElectricTrainTest {
             electricTrainPage.searchElectricSchedule(CITY_FROM, CITY_WHERE,DATE_DAY);
 
             WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-            List<WebElement> tickets = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//th[text()='Режим движения']/ancestor::table/tbody")));
-            assert tickets.size() > 0 : "Укажите корректные данные";
+            List<WebElement> tickets = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(ElectricTrainPage.TICKETS_RESULT_LIST_XPATH)));
+            assert tickets.size() > 0 : ElectricTrainPage.ERROR_MESSAGE;
         });
         drivers.forEach(WebDriver::quit);
     }

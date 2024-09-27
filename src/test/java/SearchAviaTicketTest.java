@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.AviaTicketSearchPage;
 import pages.HomePage;
 
 import java.time.Duration;
@@ -23,13 +24,13 @@ public class SearchAviaTicketTest {
     public void searchingAviaTickets(){
         List<WebDriver> drivers = Utils.getDrivers();
         drivers.parallelStream().forEach(webDriver -> {
-            HomePage homePage = new HomePage(webDriver);
+            AviaTicketSearchPage aviaTicketSearchPage = new AviaTicketSearchPage(webDriver);
             webDriver.get(Utils.PAGE);
-            homePage.searchAviaTickets(CITY_FROM,CITY_WHERE, DATE);
+            aviaTicketSearchPage.searchAviaTickets(CITY_FROM,CITY_WHERE, DATE);
 
             WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-            List<WebElement> tickets = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@data-ti='offersList']")));
-            assert tickets.size() > 0 : "Билеты не найдены";
+            List<WebElement> tickets = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(AviaTicketSearchPage.TICKETS_RESULT_LIST_XPATH)));
+            assert tickets.size() > 0 : AviaTicketSearchPage.ERROR_MESSAGE;
         });
         drivers.forEach(WebDriver::quit);
     }
